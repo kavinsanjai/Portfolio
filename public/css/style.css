@@ -703,6 +703,33 @@ section {
     border-color: var(--accent-primary);
 }
 
+.project-image {
+    width: calc(100% + 4rem);
+    margin: -2rem -2rem 1.5rem -2rem;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: rgba(0, 0, 0, 0.3);
+    min-height: 250px;
+    padding: 1rem;
+}
+
+.project-image img {
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    max-height: 350px;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
 .project-header {
     margin-bottom: 1rem;
 }
