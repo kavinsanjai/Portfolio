@@ -1,0 +1,13 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Modern portfolio website for Kavin Sanjai . S",
+  "exports": "./main.ts",
+  "tasks": {
+    "start": "deno run --allow-net --allow-read --allow-write main.ts",
+    "dev": "deno run --allow-net --allow-read --allow-write --watch main.ts"
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.208.0/"
+  }
+}

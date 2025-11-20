@@ -1,0 +1,13 @@
+{
+  "project": "kavin-portfolio",
+  "include": [
+    "main.ts",
+    "public/**",
+    "data/**",
+    "deno.json"
+  ],
+  "exclude": [
+    "node_modules",
+    ".git"
+  ]
+}

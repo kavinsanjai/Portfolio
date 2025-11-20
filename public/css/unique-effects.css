@@ -1,0 +1,395 @@
+/* ==================== UNIQUE VISUAL EFFECTS ==================== */
+
+/* Particle Canvas */
+#particleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Hero Geometric Shapes */
+.hero-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border: 2px solid rgba(0, 255, 245, 0.15);
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 5%;
+    border-radius: 50%;
+    animation: float-shape-1 8s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: 10%;
+    border-radius: 30%;
+    animation: float-shape-2 10s ease-in-out infinite;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 15%;
+    left: 50%;
+    transform: rotate(45deg);
+    animation: rotate3d 15s linear infinite;
+}
+
+@keyframes float-shape-1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(30px, -30px) rotate(180deg); }
+}
+
+@keyframes float-shape-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-20px, 20px) scale(1.1); }
+}
+
+@keyframes rotate3d {
+    0% { transform: rotate(45deg) rotateY(0deg); }
+    100% { transform: rotate(45deg) rotateY(360deg); }
+}
+
+/* Glitch Effect for Hero Title */
+.glitch-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-title.glitch {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title.glitch::before,
+.hero-title.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-title.glitch::before {
+    animation: glitch-1 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    color: var(--accent-primary);
+    z-index: -1;
+    text-shadow: -2px 0 var(--accent-primary);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.hero-title.glitch::after {
+    animation: glitch-2 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+    color: var(--accent-secondary);
+    z-index: -2;
+    text-shadow: 2px 0 var(--accent-secondary);
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+    0%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate(-3px, 2px);
+        opacity: 0.8;
+    }
+    20%, 40%, 60%, 80% {
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate(3px, -2px);
+        opacity: 0.8;
+    }
+    20%, 40%, 60%, 80% {
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+/* Typing Effect */
+.typing-effect {
+    opacity: 0;
+    overflow: hidden;
+    border-right: 3px solid var(--accent-primary);
+    white-space: nowrap;
+    animation: typing 3s steps(40, end) 1.2s forwards, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+        opacity: 1;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--accent-primary); }
+}
+
+/* Button Shine Effect */
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%  ;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.btn-primary:hover .btn-shine {
+    left: 100%;
+}
+
+/* Button Border Animation */
+.btn-border-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 2px solid var(--accent-primary);
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.btn-secondary:hover .btn-border-animation {
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    opacity: 1;
+}
+
+/* Section Numbering */
+.section-number {
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    font-weight: 300;
+    font-family: 'Courier New', monospace;
+    margin-right: 0.5rem;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0, 255, 245, 0.5), transparent);
+    margin-left: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-line::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+    animation: lineSlide 2s ease-out 0.5s forwards;
+}
+
+@keyframes lineSlide {
+    to { left: 0; }
+}
+
+/* Hexagon Pattern Background */
+.hexagon-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    background-image: 
+        repeating-linear-gradient(0deg, var(--accent-primary) 0px, var(--accent-primary) 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(60deg, var(--accent-primary) 0px, var(--accent-primary) 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(-60deg, var(--accent-primary) 0px, var(--accent-primary) 1px, transparent 1px, transparent 50px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Corner Decorations for Images */
+.corner-decoration {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--accent-primary);
+    z-index: 2;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 245, 0.4);
+}
+
+.corner-tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.corner-tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.corner-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+}
+
+.corner-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+.about-image:hover .corner-decoration {
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 0 25px rgba(0, 255, 245, 0.6);
+}
+
+.corner-tl:hover, .about-image:hover .corner-tl {
+    top: 5px;
+    left: 5px;
+}
+
+.corner-tr:hover, .about-image:hover .corner-tr {
+    top: 5px;
+    right: 5px;
+}
+
+.corner-bl:hover, .about-image:hover .corner-bl {
+    bottom: 5px;
+    left: 5px;
+}
+
+.corner-br:hover, .about-image:hover .corner-br {
+    bottom: 5px;
+    right: 5px;
+}
+
+/* Dot Grid Pattern */
+.dot-grid-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(0, 255, 245, 0.15) 1.5px, transparent 1.5px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    z-index: 0;
+    animation: moveGrid 30s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes moveGrid {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
+/* Update section title layout */
+.section-title {
+    display: flex !important;
+    align-items: center !important;
+    text-align: left !important;
+}
+
+/* Make hero content relative for z-index */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ensure container positioning */
+.about .container,
+.projects .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .shape-1,
+    .shape-2,
+    .shape-3 {
+        display: none;
+    }
+    
+    .section-number {
+        font-size: 1.2rem;
+    }
+    
+    .corner-decoration {
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+    }
+    
+    .about-image:hover .corner-decoration {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .hero-title.glitch::before,
+    .hero-title.glitch::after {
+        display: none;
+    }
+    
+    .typing-effect {
+        white-space: normal;
+        border-right: none;
+        animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

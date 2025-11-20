@@ -1,0 +1,18 @@
+# Deno Deploy Configuration
+# This file is used by Deno Deploy to configure your deployment
+
+# Entrypoint file
+entrypoint: "main.ts"
+
+# Include these files in the deployment
+include:
+  - main.ts
+  - public/
+  - data/
+
+# Exclude unnecessary files
+exclude:
+  - .git/
+  - .vscode/
+  - node_modules/
+  - README.md
