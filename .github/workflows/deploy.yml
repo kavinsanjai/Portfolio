@@ -34,3 +34,4 @@ jobs:
           project: kavinsanjai-portfolio
           entrypoint: main.ts
           root: .
+          token: ${{ secrets.DENO_DEPLOY_TOKEN }}
