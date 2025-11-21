@@ -31,6 +31,6 @@ jobs:
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: kavin-portfolio
+          project: kavinsanjai-portfolio
           entrypoint: main.ts
           root: .
