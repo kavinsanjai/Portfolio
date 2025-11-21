@@ -3,6 +3,7 @@ import { serveDir } from "https://deno.land/std@0.208.0/http/file_server.ts";
 
 const PORT = 8000;
 const MESSAGES_FILE = "./data/messages.json";
+const YOUR_EMAIL = "kavinsanjais1712@gmail.com";
 
 // Ensure messages file exists
 async function ensureMessagesFile() {
@@ -10,6 +11,44 @@ async function ensureMessagesFile() {
     await Deno.stat(MESSAGES_FILE);
   } catch {
     await Deno.writeTextFile(MESSAGES_FILE, JSON.stringify([], null, 2));
+  }
+}
+
+// Send email notification using a service
+async function sendEmailNotification(message: any): Promise<boolean> {
+  try {
+    // Using Web3Forms API (free service, no API key needed for basic usage)
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        access_key: Deno.env.get("WEB3FORMS_KEY") || "YOUR_WEB3FORMS_KEY", // Get from https://web3forms.com
+        subject: `Portfolio Contact: ${message.subject}`,
+        from_name: message.name,
+        email: message.email,
+        message: `
+Name: ${message.name}
+Email: ${message.email}
+Subject: ${message.subject}
+
+Message:
+${message.message}
+
+---
+Sent from your portfolio contact form at ${message.timestamp}
+        `,
+        to: YOUR_EMAIL,
+        replyto: message.email,
+      }),
+    });
+
+    const result = await response.json();
+    return result.success === true;
+  } catch (error) {
+    console.error("Failed to send email notification:", error);
+    return false;
   }
 }
 
@@ -126,6 +165,9 @@ async function handleContactSubmission(request: Request): Promise<Response> {
     
     // Write back to file
     await writeMessages(messages);
+
+    // Send email notification
+    await sendEmailNotification(newMessage);
 
     return new Response(
       JSON.stringify({
